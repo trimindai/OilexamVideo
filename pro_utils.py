@@ -58,9 +58,8 @@ EN_REG   = f"{FONT_DIR}/PlusJakartaSans-Regular.ttf"
 # ═══════════════════════════════════════════
 
 def ar(text):
-    """Reshape and apply BiDi to Arabic text for correct rendering."""
-    reshaped = arabic_reshaper.reshape(text)
-    return get_display(reshaped)
+    """Pass through Arabic text as-is. Tajawal font handles shaping natively."""
+    return text
 
 
 # ═══════════════════════════════════════════
