@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OilExam.tech - Instagram Marketing Toolkit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #1a2332;
+  color: #FFFFFF;
+  font-family: 'Plus Jakarta Sans', 'Tajawal', sans-serif;
+  min-height: 100vh;
+  direction: ltr;
+}
+.header {
+  text-align: center;
+  padding: 40px 20px 20px;
+  background: linear-gradient(180deg, rgba(67,97,238,0.15) 0%, transparent 100%);
+  border-bottom: 1px solid rgba(67,97,238,0.15);
+}
+.header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 8px;
+}
+.header h1 span { color: #7B93F8; }
+.header p {
+  color: #A8BAFF;
+  font-size: 14px;
+}
+#fontStatus {
+  text-align: center;
+  padding: 12px;
+  font-size: 13px;
+  color: #F6AD55;
+  background: rgba(67,97,238,0.06);
+  border-bottom: 1px solid rgba(67,97,238,0.1);
+}
+#fontStatus.loaded { color: #48BB78; }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+.video-section {
+  background: rgba(67,97,238,0.1);
+  border: 1px solid rgba(67,97,238,0.15);
+  border-radius: 16px;
+  padding: 24px;
+  flex: 1 1 500px;
+  max-width: 560px;
+}
+.video-section h2 {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+  direction: rtl;
+  text-align: right;
+}
+.video-section .subtitle {
+  font-size: 13px;
+  color: #A8BAFF;
+  margin-bottom: 16px;
+  direction: rtl;
+  text-align: right;
+}
+.canvas-wrapper {
+  width: 100%;
+  aspect-ratio: 9/16;
+  max-height: 520px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0d1520;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  position: relative;
+}
+.canvas-wrapper canvas {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 8px;
+}
+.controls {
+  display: flex;
+  gap: 12px;
+}
+.btn {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn-preview {
+  background: #4361EE;
+  color: #FFFFFF;
+}
+.btn-preview:hover:not(:disabled) { background: #5A7BF5; }
+.btn-export {
+  background: #FFFFFF;
+  color: #4361EE;
+}
+.btn-export:hover:not(:disabled) { background: #A8BAFF; color: #4361EE; }
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(67,97,238,0.15);
+  border-radius: 2px;
+  margin-top: 12px;
+  overflow: hidden;
+  display: none;
+}
+.progress-bar .fill {
+  height: 100%;
+  background: #4361EE;
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.3s;
+}
+.status-text {
+  font-size: 12px;
+  color: #A8BAFF;
+  margin-top: 8px;
+  text-align: center;
+  min-height: 18px;
+}
+.footer {
+  text-align: center;
+  padding: 20px;
+  color: rgba(168,186,255,0.5);
+  font-size: 12px;
+  border-top: 1px solid rgba(67,97,238,0.1);
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1><span>OilExam.tech</span> — Instagram Marketing Toolkit</h1>
+  <p>Generate 9:16 vertical video reels for Instagram / TikTok / Shorts</p>
+</div>
+<div id="fontStatus">Loading fonts...</div>
+
+<div class="container">
+  <!-- Video 1 -->
+  <div class="video-section">
+    <h2>شلون مستواك؟ — Quiz Challenge</h2>
+    <div class="subtitle">ريل تفاعلي يعرض أسئلة حقيقية من المنصة — ٢٦ ثانية</div>
+    <div class="canvas-wrapper">
+      <canvas id="canvas1" width="1080" height="1920"></canvas>
+    </div>
+    <div class="controls">
+      <button class="btn btn-preview" id="preview1" disabled onclick="playVideo1()">Preview</button>
+      <button class="btn btn-export" id="export1" disabled onclick="exportVideo(1)">Export .webm</button>
+    </div>
+    <div class="progress-bar" id="progress1"><div class="fill" id="fill1"></div></div>
+    <div class="status-text" id="status1"></div>
+  </div>
+
+  <!-- Video 2 -->
+  <div class="video-section">
+    <h2>رحلتك للنجاح — Success Roadmap</h2>
+    <div class="subtitle">خارطة طريق بصرية من الصفر للنجاح — ٢٩ ثانية</div>
+    <div class="canvas-wrapper">
+      <canvas id="canvas2" width="1080" height="1920"></canvas>
+    </div>
+    <div class="controls">
+      <button class="btn btn-preview" id="preview2" disabled onclick="playVideo2()">Preview</button>
+      <button class="btn btn-export" id="export2" disabled onclick="exportVideo(2)">Export .webm</button>
+    </div>
+    <div class="progress-bar" id="progress2"><div class="fill" id="fill2"></div></div>
+    <div class="status-text" id="status2"></div>
+  </div>
+</div>
+
+<div class="footer">
+  Powered by Trimind Company — Export as .webm, convert to MP4 with: <code style="color:#7B93F8">ffmpeg -i video.webm -c:v libx264 -preset slow -crf 18 video.mp4</code>
+</div>
+
+<script>
+// ============================================================
+// BRAND CONSTANTS
+// ============================================================
+const C = {
+  primary: '#4361EE',
+  mid: '#5A7BF5',
+  light: '#7B93F8',
+  pale: '#A8BAFF',
+  dark: '#1a2332',
+  white: '#FFFFFF',
+  green: '#48BB78',
+  red: '#E53E3E',
+  orange: '#F6AD55',
+  pink: '#ED64A6',
+};
+const W = 1080, H = 1920, FPS = 30;
+
+// ============================================================
+// ANIMATION HELPERS
+// ============================================================
+function easeOut(t) { return 1 - Math.pow(1 - Math.min(1, Math.max(0, t)), 3); }
+function easeInOut(t) { t = Math.min(1, Math.max(0, t)); return 3*t*t - 2*t*t*t; }
+
+function hexToRgb(hex) {
+  hex = hex.replace('#','');
+  return { r: parseInt(hex.substring(0,2),16), g: parseInt(hex.substring(2,4),16), b: parseInt(hex.substring(4,6),16) };
+}
+function lerpColor(c1, c2, t) {
+  t = Math.min(1, Math.max(0, t));
+  const a = hexToRgb(c1), b = hexToRgb(c2);
+  const r = Math.round(a.r + (b.r - a.r)*t);
+  const g = Math.round(a.g + (b.g - a.g)*t);
+  const bl = Math.round(a.b + (b.b - a.b)*t);
+  return `rgb(${r},${g},${bl})`;
+}
+
+function drawGradientBg(ctx) {
+  const g = ctx.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, '#0d1520');
+  g.addColorStop(0.3, C.dark);
+  g.addColorStop(0.7, C.dark);
+  g.addColorStop(1, '#0d1520');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, W, H);
+  // subtle radial from center top
+  const rg = ctx.createRadialGradient(W/2, 200, 0, W/2, 200, 800);
+  rg.addColorStop(0, 'rgba(67,97,238,0.08)');
+  rg.addColorStop(1, 'rgba(67,97,238,0)');
+  ctx.fillStyle = rg;
+  ctx.fillRect(0, 0, W, H);
+}
+
+function drawGridOverlay(ctx) {
+  ctx.strokeStyle = 'rgba(67,97,238,0.04)';
+  ctx.lineWidth = 1;
+  for (let x = 0; x < W; x += 60) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+  }
+  for (let y = 0; y < H; y += 60) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+  }
+}
+
+function drawRadialGlow(ctx, cx, cy, radius, color, alpha) {
+  const rgb = hexToRgb(color);
+  const rg = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+  rg.addColorStop(0, `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`);
+  rg.addColorStop(1, `rgba(${rgb.r},${rgb.g},${rgb.b},0)`);
+  ctx.fillStyle = rg;
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, 0, Math.PI*2);
+  ctx.fill();
+}
+
+function drawRoundedRect(ctx, x, y, w, h, r, fill, stroke) {
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.lineTo(x+w-r, y);
+  ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+  ctx.lineTo(x+w, y+h-r);
+  ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+  ctx.lineTo(x+r, y+h);
+  ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+  ctx.lineTo(x, y+r);
+  ctx.quadraticCurveTo(x, y, x+r, y);
+  ctx.closePath();
+  if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+  if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 2; ctx.stroke(); }
+}
+
+function setArabicFont(ctx, weight, size) {
+  ctx.font = `${weight} ${size}px Tajawal`;
+  ctx.direction = 'rtl';
+  ctx.textBaseline = 'middle';
+}
+function setEnglishFont(ctx, weight, size) {
+  ctx.font = `${weight} ${size}px "Plus Jakarta Sans"`;
+  ctx.direction = 'ltr';
+  ctx.textBaseline = 'middle';
+}
+
+function drawCenteredText(ctx, text, x, y, font, color, isArabic) {
+  ctx.save();
+  ctx.font = font;
+  ctx.fillStyle = color;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  if (isArabic) { ctx.direction = 'rtl'; } else { ctx.direction = 'ltr'; }
+  ctx.fillText(text, x, y);
+  ctx.restore();
+}
+
+function drawTextWithAlpha(ctx, text, x, y, font, color, alpha, isArabic) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  drawCenteredText(ctx, text, x, y, font, color, isArabic);
+  ctx.restore();
+}
+
+// Pulsing scale helper
+function pulse(t, speed, amount) {
+  return 1 + Math.sin(t * speed * Math.PI * 2) * amount;
+}
+
+// Draw OilExam logo text
+function drawLogo(ctx, x, y, size, alpha) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  setEnglishFont(ctx, 800, size);
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = C.white;
+  ctx.fillText('Oil', x - ctx.measureText('Exam.tech').width*0.15, y);
+  const oilW = ctx.measureText('Oil').width;
+  ctx.fillStyle = C.light;
+  ctx.fillText('Exam.tech', x + oilW*0.35, y);
+  ctx.restore();
+}
+
+// Draw a CTA button
+function drawCTAButton(ctx, x, y, text, w, h, pulseT) {
+  const s = pulse(pulseT, 0.8, 0.03);
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(s, s);
+  // Shadow
+  drawRadialGlow(ctx, 0, 0, w*0.8, C.primary, 0.25);
+  drawRoundedRect(ctx, -w/2, -h/2, w, h, h/2, C.white, null);
+  drawCenteredText(ctx, text, 0, 0, '800 52px Tajawal', C.primary, true);
+  ctx.restore();
+}
+
+// ============================================================
+// FONT LOADING
+// ============================================================
+let fontsReady = false;
+
+async function loadFonts() {
+  const statusEl = document.getElementById('fontStatus');
+  try {
+    await document.fonts.load('900 48px Tajawal');
+    await document.fonts.load('400 48px Tajawal');
+    await document.fonts.load('700 48px Tajawal');
+    await document.fonts.load('800 48px Tajawal');
+    await document.fonts.load('800 48px "Plus Jakarta Sans"');
+    await document.fonts.load('700 48px "Plus Jakarta Sans"');
+    await document.fonts.load('600 48px "Plus Jakarta Sans"');
+    await document.fonts.load('400 48px "Plus Jakarta Sans"');
+    // Force render Arabic glyphs
+    const testCanvas = document.createElement('canvas');
+    testCanvas.width = 800; testCanvas.height = 200;
+    const testCtx = testCanvas.getContext('2d');
+    testCtx.font = '900 48px Tajawal';
+    testCtx.direction = 'rtl';
+    testCtx.fillText('ابتثجحخدذرزسشصضطظعغفقكلمنهوي', 400, 50);
+    testCtx.fillText('تجهّزك بتجهّزك جربه جرب جاهز مصدّعك', 400, 100);
+    testCtx.fillText('شلون مستواك بالإنجليزي تبي تتمرن', 400, 150);
+    await new Promise(r => requestAnimationFrame(r));
+    await new Promise(r => requestAnimationFrame(r));
+    await new Promise(r => setTimeout(r, 200));
+    fontsReady = true;
+    statusEl.textContent = 'Fonts loaded successfully';
+    statusEl.className = 'loaded';
+    document.getElementById('preview1').disabled = false;
+    document.getElementById('export1').disabled = false;
+    document.getElementById('preview2').disabled = false;
+    document.getElementById('export2').disabled = false;
+    // Draw first frames
+    drawVideo1Frame(document.getElementById('canvas1').getContext('2d'), 0);
+    drawVideo2Frame(document.getElementById('canvas2').getContext('2d'), 0);
+  } catch(e) {
+    statusEl.textContent = 'Font loading error: ' + e.message + ' — retrying...';
+    setTimeout(loadFonts, 1000);
+  }
+}
+
+// ============================================================
+// VIDEO 1: QUIZ CHALLENGE — شلون مستواك؟
+// ============================================================
+// Scene timing (seconds): 0-3, 3-7, 7-11, 11-15, 15-18, 18-22, 22-26
+const V1_SCENES = [
+  { start: 0, dur: 3 },    // Hook
+  { start: 3, dur: 4 },    // Q1
+  { start: 7, dur: 4 },    // Q2
+  { start: 11, dur: 4 },   // Q3
+  { start: 15, dur: 3 },   // Score
+  { start: 18, dur: 4 },   // Platform
+  { start: 22, dur: 4 },   // CTA
+];
+const V1_TOTAL = 26;
+
+function drawVideo1Frame(ctx, time) {
+  drawGradientBg(ctx);
+  drawGridOverlay(ctx);
+
+  // Scene 1: Hook — "شلون مستواك بالإنجليزي؟"
+  if (time < 3) {
+    const t = time / 3;
+    const fadeIn = easeOut(t * 2);
+    const scale = pulse(time, 1.2, 0.04);
+
+    drawRadialGlow(ctx, W/2, H*0.4, 400, C.primary, 0.12 * fadeIn);
+
+    // Question mark animated
+    ctx.save();
+    ctx.globalAlpha = fadeIn;
+    ctx.translate(W/2, H*0.32);
+    ctx.scale(scale, scale);
+    drawCenteredText(ctx, '؟', 0, 0, '900 200px Tajawal', C.light, true);
+    ctx.restore();
+
+    // Main text
+    const textFade = easeOut(Math.max(0, t*2 - 0.3));
+    drawTextWithAlpha(ctx, 'شلون مستواك', W/2, H*0.50, '900 88px Tajawal', C.white, textFade, true);
+    drawTextWithAlpha(ctx, 'بالإنجليزي؟', W/2, H*0.57, '900 88px Tajawal', C.light, textFade, true);
+
+    // Subtitle
+    const subFade = easeOut(Math.max(0, t*2 - 0.6));
+    drawTextWithAlpha(ctx, 'جرّب الحين وشوف!', W/2, H*0.66, '700 52px Tajawal', C.pale, subFade, true);
+
+    // Pulsing circles decoration
+    for (let i = 0; i < 3; i++) {
+      const r = 250 + i * 80;
+      const a = 0.06 * fadeIn * (1 - i*0.25) * pulse(time, 0.5+i*0.2, 0.5);
+      ctx.beginPath();
+      ctx.arc(W/2, H*0.4, r, 0, Math.PI*2);
+      ctx.strokeStyle = `rgba(67,97,238,${a})`;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+  }
+
+  // Scene 2: Question 1 — Vocabulary
+  else if (time < 7) {
+    const st = time - 3;
+    const t = st / 4;
+    drawQuizQuestion(ctx, st, t,
+      'سؤال ١ — مفردات',
+      "شنو معنى 'Pipeline'؟",
+      ['خط أنابيب', 'مضخة مياه', 'صمام أمان', 'برج حفر'],
+      0, // correct index
+      C.light
+    );
+  }
+
+  // Scene 3: Question 2 — Phrasal verb
+  else if (time < 11) {
+    const st = time - 7;
+    const t = st / 4;
+    drawQuizQuestion(ctx, st, t,
+      'سؤال ٢ — أفعال مركّبة',
+      "شنو معنى 'Carry out'؟",
+      ['يشيل بره', 'ينفّذ / يطبّق', 'يوصل للبيت', 'يرفع فوق'],
+      1,
+      C.orange
+    );
+  }
+
+  // Scene 4: Question 3 — Grammar
+  else if (time < 15) {
+    const st = time - 11;
+    const t = st / 4;
+    drawQuizQuestion(ctx, st, t,
+      'سؤال ٣ — قواعد',
+      'وش الصح؟',
+      ['The oil is been extracted', 'The oil is being extracted', '', ''],
+      1,
+      C.pink
+    );
+  }
+
+  // Scene 5: Score reveal
+  else if (time < 18) {
+    const st = time - 15;
+    const t = st / 3;
+
+    drawRadialGlow(ctx, W/2, H*0.4, 500, C.green, 0.1 * easeOut(t*2));
+
+    // Score counter
+    const countUp = Math.min(3, Math.floor(easeOut(Math.min(1, t*1.5)) * 3.99));
+    const scoreFade = easeOut(t * 2);
+
+    ctx.save();
+    ctx.globalAlpha = scoreFade;
+    ctx.translate(W/2, H*0.38);
+    const s = pulse(st, 1.5, 0.05);
+    ctx.scale(s, s);
+    drawCenteredText(ctx, `${countUp}/٣`, 0, 0, '900 160px Tajawal', C.white, true);
+    ctx.restore();
+
+    const qFade = easeOut(Math.max(0, t*2 - 0.4));
+    drawTextWithAlpha(ctx, 'صح؟ ولا غلطت؟', W/2, H*0.52, '800 72px Tajawal', C.light, qFade, true);
+
+    // Animated checkmarks
+    if (t > 0.3) {
+      const checkFade = easeOut((t - 0.3) * 3);
+      for (let i = 0; i < 3; i++) {
+        const cx = W/2 + (i-1)*140;
+        const cy = H*0.62;
+        const delay = i * 0.12;
+        const cf = easeOut(Math.max(0, (t - 0.3 - delay) * 4));
+        ctx.save();
+        ctx.globalAlpha = cf;
+        drawRoundedRect(ctx, cx-45, cy-45, 90, 90, 20, 'rgba(72,187,120,0.2)', 'rgba(72,187,120,0.4)');
+        drawCenteredText(ctx, '✓', cx, cy, '700 52px "Plus Jakarta Sans"', C.green, false);
+        ctx.restore();
+      }
+    }
+  }
+
+  // Scene 6: Platform reveal
+  else if (time < 22) {
+    const st = time - 18;
+    const t = st / 4;
+
+    drawRadialGlow(ctx, W/2, H*0.35, 500, C.primary, 0.12 * easeOut(t*2));
+
+    const titleFade = easeOut(t * 2.5);
+    drawTextWithAlpha(ctx, 'تبي تتمرن أكثر؟', W/2, H*0.28, '900 76px Tajawal', C.white, titleFade, true);
+
+    // Logo
+    const logoFade = easeOut(Math.max(0, t*2 - 0.3));
+    drawLogo(ctx, W/2, H*0.38, 72, logoFade);
+
+    // Stats cards
+    const stats = [
+      { num: '157', label: 'سؤال مفردات', color: C.light },
+      { num: '159', label: 'فعل مركّب', color: C.orange },
+      { num: '130', label: 'سؤال قواعد', color: C.pink },
+      { num: '50', label: 'اختبار تجريبي', color: C.green },
+    ];
+
+    const cardW = 440, cardH = 110, gap = 20;
+    const startY = H*0.48;
+    for (let i = 0; i < stats.length; i++) {
+      const delay = 0.1 + i * 0.1;
+      const cf = easeOut(Math.max(0, (t - delay) * 3));
+      const slideX = (1 - cf) * 100;
+      const cy = startY + i * (cardH + gap);
+      ctx.save();
+      ctx.globalAlpha = cf;
+      ctx.translate(slideX, 0);
+      drawRoundedRect(ctx, W/2 - cardW/2, cy, cardW, cardH, 20, 'rgba(67,97,238,0.1)', 'rgba(67,97,238,0.15)');
+      // Number
+      drawCenteredText(ctx, stats[i].num, W/2 - cardW/2 + 80, cy + cardH/2, '800 52px "Plus Jakarta Sans"', stats[i].color, false);
+      // Label
+      drawCenteredText(ctx, stats[i].label, W/2 + 60, cy + cardH/2, '700 42px Tajawal', C.white, true);
+      ctx.restore();
+    }
+
+    // Total
+    const totalFade = easeOut(Math.max(0, t - 0.7) * 3);
+    drawTextWithAlpha(ctx, '525+ سؤال وتمرين', W/2, H*0.82, '800 56px Tajawal', C.pale, totalFade, true);
+  }
+
+  // Scene 7: CTA
+  else if (time < 26) {
+    const st = time - 22;
+    const t = st / 4;
+    drawCTAScene(ctx, st, t);
+  }
+}
+
+function drawQuizQuestion(ctx, st, t, header, question, choices, correctIdx, accentColor) {
+  const headerFade = easeOut(t * 3);
+  const questionFade = easeOut(Math.max(0, t*3 - 0.5));
+
+  // Header badge
+  ctx.save();
+  ctx.globalAlpha = headerFade;
+  const badgeW = 400, badgeH = 60;
+  drawRoundedRect(ctx, W/2 - badgeW/2, H*0.14, badgeW, badgeH, 30, 'rgba(67,97,238,0.15)', 'rgba(67,97,238,0.25)');
+  drawCenteredText(ctx, header, W/2, H*0.14 + badgeH/2, '700 36px Tajawal', accentColor, true);
+  ctx.restore();
+
+  // Question
+  drawTextWithAlpha(ctx, question, W/2, H*0.27, '800 64px Tajawal', C.white, questionFade, true);
+
+  // Glow behind question
+  drawRadialGlow(ctx, W/2, H*0.27, 350, C.primary, 0.08 * questionFade);
+
+  // Choices
+  const choiceW = 800, choiceH = 120, gap = 24;
+  const startY = H*0.38;
+  const nonEmpty = choices.filter(c => c !== '');
+  const count = nonEmpty.length;
+
+  for (let i = 0; i < count; i++) {
+    const delay = 0.15 + i * 0.08;
+    const cf = easeOut(Math.max(0, (t - delay) * 3));
+    const slideY = (1 - cf) * 60;
+    const cy = startY + i * (choiceH + gap) + slideY;
+
+    // Determine colors: after 70% through, highlight correct
+    const revealT = Math.max(0, (t - 0.7) * 4);
+    let bg, border, textCol;
+    if (i === correctIdx && revealT > 0) {
+      bg = lerpColor('#1a2332', '#1a4030', easeOut(revealT));
+      border = `rgba(72,187,120,${0.15 + easeOut(revealT)*0.5})`;
+      textCol = lerpColor(C.white, C.green, easeOut(revealT));
+    } else if (i !== correctIdx && revealT > 0.5) {
+      bg = 'rgba(67,97,238,0.05)';
+      border = 'rgba(67,97,238,0.08)';
+      textCol = 'rgba(255,255,255,0.4)';
+    } else {
+      bg = 'rgba(67,97,238,0.1)';
+      border = 'rgba(67,97,238,0.15)';
+      textCol = C.white;
+    }
+
+    ctx.save();
+    ctx.globalAlpha = cf;
+    drawRoundedRect(ctx, W/2 - choiceW/2, cy, choiceW, choiceH, 24, bg, border);
+
+    // Choice letter
+    const letter = ['A', 'B', 'C', 'D'][i];
+    drawCenteredText(ctx, letter, W/2 - choiceW/2 + 55, cy + choiceH/2, '700 40px "Plus Jakarta Sans"', accentColor, false);
+
+    // Choice text — detect if Arabic or English
+    const isAr = /[\u0600-\u06FF]/.test(nonEmpty[i]);
+    const font = isAr ? '700 44px Tajawal' : '700 40px "Plus Jakarta Sans"';
+    drawCenteredText(ctx, nonEmpty[i], W/2 + 20, cy + choiceH/2, font, textCol, isAr);
+
+    // Checkmark on correct
+    if (i === correctIdx && revealT > 0.3) {
+      const checkA = easeOut((revealT - 0.3) * 2);
+      drawTextWithAlpha(ctx, '✓', W/2 + choiceW/2 - 55, cy + choiceH/2, '700 44px "Plus Jakarta Sans"', C.green, checkA, false);
+    }
+    ctx.restore();
+  }
+
+  // Decorative corners
+  ctx.save();
+  ctx.globalAlpha = headerFade * 0.3;
+  ctx.strokeStyle = accentColor;
+  ctx.lineWidth = 3;
+  // Top-left corner
+  ctx.beginPath(); ctx.moveTo(60, 100); ctx.lineTo(60, 60); ctx.lineTo(100, 60); ctx.stroke();
+  // Top-right corner
+  ctx.beginPath(); ctx.moveTo(W-60, 100); ctx.lineTo(W-60, 60); ctx.lineTo(W-100, 60); ctx.stroke();
+  // Bottom-left
+  ctx.beginPath(); ctx.moveTo(60, H-100); ctx.lineTo(60, H-60); ctx.lineTo(100, H-60); ctx.stroke();
+  // Bottom-right
+  ctx.beginPath(); ctx.moveTo(W-60, H-100); ctx.lineTo(W-60, H-60); ctx.lineTo(W-100, H-60); ctx.stroke();
+  ctx.restore();
+}
+
+function drawCTAScene(ctx, st, t) {
+  drawRadialGlow(ctx, W/2, H*0.42, 600, C.primary, 0.1 * easeOut(t*2));
+
+  const titleFade = easeOut(t * 3);
+  drawTextWithAlpha(ctx, 'سجّل الحين مجاناً', W/2, H*0.28, '900 80px Tajawal', C.white, titleFade, true);
+
+  // CTA button
+  const btnFade = easeOut(Math.max(0, t*2 - 0.3));
+  ctx.save();
+  ctx.globalAlpha = btnFade;
+  drawCTAButton(ctx, W/2, H*0.42, 'ابدأ الحين', 500, 100, st);
+  ctx.restore();
+
+  // URL
+  const urlFade = easeOut(Math.max(0, t*2 - 0.5));
+  drawTextWithAlpha(ctx, 'oilexam.tech', W/2, H*0.54, '800 68px "Plus Jakarta Sans"', C.light, urlFade, false);
+
+  // Bio link badge
+  const bioFade = easeOut(Math.max(0, t*2 - 0.6));
+  ctx.save();
+  ctx.globalAlpha = bioFade;
+  const bw = 380, bh = 64;
+  drawRoundedRect(ctx, W/2 - bw/2, H*0.60, bw, bh, 32, 'rgba(67,97,238,0.15)', 'rgba(67,97,238,0.25)');
+  drawCenteredText(ctx, 'الرابط بالبايو', W/2, H*0.60 + bh/2, '700 38px Tajawal', C.pale, true);
+  ctx.restore();
+
+  // Powered by
+  const pwFade = easeOut(Math.max(0, t*2 - 0.8));
+  drawTextWithAlpha(ctx, 'Powered by Trimind Company', W/2, H*0.78, '600 32px "Plus Jakarta Sans"', 'rgba(168,186,255,0.5)', pwFade, false);
+
+  // Floating particles
+  for (let i = 0; i < 8; i++) {
+    const angle = (i / 8) * Math.PI * 2 + st * 0.3;
+    const radius = 300 + Math.sin(st * 0.5 + i) * 50;
+    const px = W/2 + Math.cos(angle) * radius;
+    const py = H*0.42 + Math.sin(angle) * radius * 0.5;
+    const pa = 0.15 * btnFade;
+    ctx.save();
+    ctx.globalAlpha = pa;
+    ctx.fillStyle = C.light;
+    ctx.beginPath();
+    ctx.arc(px, py, 4 + Math.sin(st + i)*2, 0, Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+
+// ============================================================
+// VIDEO 2: SUCCESS ROADMAP — رحلتك للنجاح
+// ============================================================
+// Scene timing: 0-3, 3-6.5, 6.5-10, 10-13.5, 13.5-17, 17-20.5, 20.5-25, 25-29
+const V2_TOTAL = 29;
+
+const ROADMAP_STEPS = [
+  { num: '١', title: 'ابدأ بالمفردات', stat: '157 كلمة أساسية', color: C.light },
+  { num: '٢', title: 'تعلّم الأفعال', stat: '159 فعل مركّب', color: C.orange },
+  { num: '٣', title: 'أتقن القواعد', stat: '130 سؤال قواعد', color: C.pink },
+  { num: '٤', title: 'مارس القراءة', stat: '29 نص قراءة', color: C.green },
+  { num: '٥', title: 'اختبر نفسك', stat: '50 سؤال اختبار تجريبي', color: C.pale },
+];
+
+function drawVideo2Frame(ctx, time) {
+  drawGradientBg(ctx);
+  drawGridOverlay(ctx);
+
+  // Scene 1: Hook
+  if (time < 3) {
+    const t = time / 3;
+    drawRadialGlow(ctx, W/2, H*0.45, 500, C.primary, 0.1 * easeOut(t*2));
+
+    const titleFade = easeOut(t * 2.5);
+    drawTextWithAlpha(ctx, 'من الصفر', W/2, H*0.38, '900 92px Tajawal', C.white, titleFade, true);
+    const t2Fade = easeOut(Math.max(0, t*2 - 0.3));
+    drawTextWithAlpha(ctx, 'للنجاح', W/2, H*0.46, '900 92px Tajawal', C.light, t2Fade, true);
+
+    // Animated path drawing
+    const pathProgress = easeOut(Math.max(0, t - 0.2) * 1.5);
+    ctx.save();
+    ctx.strokeStyle = C.primary;
+    ctx.lineWidth = 6;
+    ctx.setLineDash([12, 8]);
+    ctx.lineDashOffset = -time * 40;
+    ctx.beginPath();
+    const pathLen = pathProgress * H * 0.3;
+    ctx.moveTo(W/2, H*0.58);
+    ctx.lineTo(W/2, H*0.58 + pathLen);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.restore();
+
+    // Arrow at end
+    if (pathProgress > 0.5) {
+      const arrowA = easeOut((pathProgress - 0.5)*2);
+      const arrowY = H*0.58 + pathLen;
+      ctx.save();
+      ctx.globalAlpha = arrowA;
+      ctx.fillStyle = C.primary;
+      ctx.beginPath();
+      ctx.moveTo(W/2 - 16, arrowY - 10);
+      ctx.lineTo(W/2, arrowY + 10);
+      ctx.lineTo(W/2 + 16, arrowY - 10);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // Decorative milestone dots preview
+    for (let i = 0; i < 5; i++) {
+      const dotFade = easeOut(Math.max(0, t - 0.4 - i*0.08)*3);
+      const dotY = H*0.58 + (i+1) * H*0.06;
+      ctx.save();
+      ctx.globalAlpha = dotFade * 0.3;
+      ctx.fillStyle = ROADMAP_STEPS[i].color;
+      ctx.beginPath();
+      ctx.arc(W/2, dotY, 8, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  // Scenes 2-6: Steps 1-5
+  else if (time < 20.5) {
+    const stepScenes = [
+      { start: 3, dur: 3.5 },
+      { start: 6.5, dur: 3.5 },
+      { start: 10, dur: 3.5 },
+      { start: 13.5, dur: 3.5 },
+      { start: 17, dur: 3.5 },
+    ];
+    let currentStep = -1;
+    let st = 0, t = 0;
+    for (let i = 0; i < stepScenes.length; i++) {
+      if (time >= stepScenes[i].start && time < stepScenes[i].start + stepScenes[i].dur) {
+        currentStep = i;
+        st = time - stepScenes[i].start;
+        t = st / stepScenes[i].dur;
+        break;
+      }
+    }
+    if (currentStep >= 0) {
+      drawRoadmapStep(ctx, st, t, currentStep, time);
+    }
+  }
+
+  // Scene 7: Destination — celebration
+  else if (time < 25) {
+    const st = time - 20.5;
+    const t = st / 4.5;
+
+    drawRadialGlow(ctx, W/2, H*0.35, 600, C.green, 0.12 * easeOut(t*2));
+
+    // Title
+    const titleFade = easeOut(t * 3);
+    drawTextWithAlpha(ctx, 'وصلت!', W/2, H*0.20, '900 100px Tajawal', C.green, titleFade, true);
+    const subFade = easeOut(Math.max(0, t*2 - 0.2));
+    drawTextWithAlpha(ctx, 'جاهز للاختبار', W/2, H*0.28, '900 80px Tajawal', C.white, subFade, true);
+
+    // All 5 checkmarks in a row
+    for (let i = 0; i < 5; i++) {
+      const delay = 0.15 + i * 0.08;
+      const cf = easeOut(Math.max(0, (t - delay) * 3));
+      const cx = W/2 + (i - 2) * 160;
+      const cy = H*0.40;
+      ctx.save();
+      ctx.globalAlpha = cf;
+      // Circle
+      ctx.beginPath();
+      ctx.arc(cx, cy, 55, 0, Math.PI*2);
+      const rgb = hexToRgb(ROADMAP_STEPS[i].color);
+      ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},0.2)`;
+      ctx.fill();
+      ctx.strokeStyle = ROADMAP_STEPS[i].color;
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      // Checkmark
+      drawCenteredText(ctx, '✓', cx, cy, '700 44px "Plus Jakarta Sans"', ROADMAP_STEPS[i].color, false);
+      ctx.restore();
+    }
+
+    // Completed steps list
+    const listStartY = H*0.50;
+    for (let i = 0; i < 5; i++) {
+      const delay = 0.3 + i * 0.06;
+      const lf = easeOut(Math.max(0, (t - delay) * 3));
+      const ly = listStartY + i * 70;
+      drawTextWithAlpha(ctx, `${ROADMAP_STEPS[i].num}. ${ROADMAP_STEPS[i].title}`, W/2, ly, '700 44px Tajawal', ROADMAP_STEPS[i].color, lf, true);
+    }
+
+    // Total
+    const totalFade = easeOut(Math.max(0, t - 0.6) * 3);
+    ctx.save();
+    ctx.globalAlpha = totalFade;
+    const tw = 600, th = 100;
+    drawRoundedRect(ctx, W/2 - tw/2, H*0.76, tw, th, 24, 'rgba(67,97,238,0.15)', 'rgba(67,97,238,0.25)');
+    drawCenteredText(ctx, '525+ سؤال وتمرين', W/2, H*0.76 + th/2, '800 48px Tajawal', C.white, true);
+    ctx.restore();
+
+    // Celebration particles
+    for (let i = 0; i < 12; i++) {
+      const angle = (i / 12) * Math.PI * 2 + st * 0.4;
+      const r = 200 + Math.sin(st * 0.7 + i * 1.3) * 100;
+      const px = W/2 + Math.cos(angle) * r;
+      const py = H*0.35 + Math.sin(angle) * r * 0.4;
+      const pa = easeOut(Math.max(0, t - 0.2)) * 0.3;
+      const colors = [C.green, C.light, C.orange, C.pink, C.pale];
+      ctx.save();
+      ctx.globalAlpha = pa;
+      ctx.fillStyle = colors[i % 5];
+      ctx.beginPath();
+      ctx.arc(px, py, 3 + Math.sin(st*2 + i)*2, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  // Scene 8: CTA
+  else if (time < 29) {
+    const st = time - 25;
+    const t = st / 4;
+
+    drawRadialGlow(ctx, W/2, H*0.42, 600, C.primary, 0.1 * easeOut(t*2));
+
+    const titleFade = easeOut(t * 3);
+    drawTextWithAlpha(ctx, 'ابدأ رحلتك الحين', W/2, H*0.28, '900 80px Tajawal', C.white, titleFade, true);
+
+    // CTA button
+    const btnFade = easeOut(Math.max(0, t*2 - 0.3));
+    ctx.save();
+    ctx.globalAlpha = btnFade;
+    drawCTAButton(ctx, W/2, H*0.42, 'سجّل مجاناً', 500, 100, st);
+    ctx.restore();
+
+    // URL
+    const urlFade = easeOut(Math.max(0, t*2 - 0.5));
+    drawTextWithAlpha(ctx, 'oilexam.tech', W/2, H*0.54, '800 68px "Plus Jakarta Sans"', C.light, urlFade, false);
+
+    // Bio link
+    const bioFade = easeOut(Math.max(0, t*2 - 0.6));
+    ctx.save();
+    ctx.globalAlpha = bioFade;
+    const bw = 380, bh = 64;
+    drawRoundedRect(ctx, W/2 - bw/2, H*0.60, bw, bh, 32, 'rgba(67,97,238,0.15)', 'rgba(67,97,238,0.25)');
+    drawCenteredText(ctx, 'الرابط بالبايو', W/2, H*0.60 + bh/2, '700 38px Tajawal', C.pale, true);
+    ctx.restore();
+
+    // Powered by
+    const pwFade = easeOut(Math.max(0, t*2 - 0.8));
+    drawTextWithAlpha(ctx, 'Powered by Trimind Company', W/2, H*0.78, '600 32px "Plus Jakarta Sans"', 'rgba(168,186,255,0.5)', pwFade, false);
+
+    // Floating particles
+    for (let i = 0; i < 8; i++) {
+      const angle = (i / 8) * Math.PI * 2 + st * 0.3;
+      const radius = 300 + Math.sin(st * 0.5 + i) * 50;
+      const px = W/2 + Math.cos(angle) * radius;
+      const py = H*0.42 + Math.sin(angle) * radius * 0.5;
+      const pa = 0.15 * btnFade;
+      ctx.save();
+      ctx.globalAlpha = pa;
+      ctx.fillStyle = C.light;
+      ctx.beginPath();
+      ctx.arc(px, py, 4 + Math.sin(st + i)*2, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+}
+
+function drawRoadmapStep(ctx, st, t, stepIdx, globalTime) {
+  const step = ROADMAP_STEPS[stepIdx];
+
+  // Draw the vertical roadmap line on the left side
+  const lineX = 200;
+  const lineTop = 200;
+  const lineBot = H - 200;
+  const lineLen = lineBot - lineTop;
+
+  // Path line (all previous segments solid, current animating)
+  ctx.save();
+  ctx.lineWidth = 6;
+  // Completed segments
+  for (let i = 0; i < stepIdx; i++) {
+    const y1 = lineTop + (i / 5) * lineLen;
+    const y2 = lineTop + ((i+1) / 5) * lineLen;
+    ctx.strokeStyle = ROADMAP_STEPS[i].color;
+    ctx.globalAlpha = 0.5;
+    ctx.beginPath();
+    ctx.moveTo(lineX, y1);
+    ctx.lineTo(lineX, y2);
+    ctx.stroke();
+  }
+  // Current segment animating
+  const segY1 = lineTop + (stepIdx / 5) * lineLen;
+  const segY2 = lineTop + ((stepIdx+1) / 5) * lineLen;
+  const segProgress = easeOut(Math.min(1, t * 2));
+  ctx.strokeStyle = step.color;
+  ctx.globalAlpha = 0.7;
+  ctx.beginPath();
+  ctx.moveTo(lineX, segY1);
+  ctx.lineTo(lineX, segY1 + (segY2 - segY1) * segProgress);
+  ctx.stroke();
+  // Future segments dashed
+  ctx.globalAlpha = 0.15;
+  ctx.setLineDash([10, 10]);
+  ctx.strokeStyle = 'rgba(67,97,238,0.3)';
+  for (let i = stepIdx + 1; i < 5; i++) {
+    const y1 = lineTop + (i / 5) * lineLen;
+    const y2 = lineTop + ((i+1) / 5) * lineLen;
+    ctx.beginPath();
+    ctx.moveTo(lineX, y1);
+    ctx.lineTo(lineX, y2);
+    ctx.stroke();
+  }
+  ctx.setLineDash([]);
+  ctx.restore();
+
+  // Draw all milestone nodes
+  for (let i = 0; i <= 4; i++) {
+    const nodeY = lineTop + (i / 5) * lineLen + lineLen / 10;
+    const isCompleted = i < stepIdx;
+    const isCurrent = i === stepIdx;
+    const isFuture = i > stepIdx;
+
+    ctx.save();
+    if (isCurrent) {
+      // Glow
+      const glowA = easeOut(Math.min(1, t * 3));
+      drawRadialGlow(ctx, lineX, nodeY, 80, step.color, 0.15 * glowA);
+      // Pulsing circle
+      const ps = pulse(st, 1.2, 0.08);
+      ctx.translate(lineX, nodeY);
+      ctx.scale(ps, ps);
+      ctx.beginPath();
+      ctx.arc(0, 0, 40, 0, Math.PI*2);
+      const rgb = hexToRgb(step.color);
+      ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},0.3)`;
+      ctx.fill();
+      ctx.strokeStyle = step.color;
+      ctx.lineWidth = 4;
+      ctx.stroke();
+      drawCenteredText(ctx, step.num, 0, 0, '800 40px Tajawal', step.color, true);
+    } else if (isCompleted) {
+      ctx.globalAlpha = 0.6;
+      ctx.translate(lineX, nodeY);
+      ctx.beginPath();
+      ctx.arc(0, 0, 32, 0, Math.PI*2);
+      const rgb = hexToRgb(ROADMAP_STEPS[i].color);
+      ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},0.2)`;
+      ctx.fill();
+      drawCenteredText(ctx, '✓', 0, 0, '700 36px "Plus Jakarta Sans"', ROADMAP_STEPS[i].color, false);
+    } else {
+      ctx.globalAlpha = 0.2;
+      ctx.translate(lineX, nodeY);
+      ctx.beginPath();
+      ctx.arc(0, 0, 30, 0, Math.PI*2);
+      ctx.strokeStyle = 'rgba(67,97,238,0.3)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      drawCenteredText(ctx, ROADMAP_STEPS[i].num, 0, 0, '700 32px Tajawal', C.pale, true);
+    }
+    ctx.restore();
+  }
+
+  // Current step content card — on the right side
+  const cardFade = easeOut(Math.max(0, t*2.5 - 0.3));
+  const cardSlide = (1 - cardFade) * 80;
+  const currentNodeY = lineTop + (stepIdx / 5) * lineLen + lineLen / 10;
+
+  ctx.save();
+  ctx.globalAlpha = cardFade;
+  ctx.translate(cardSlide, 0);
+
+  const cardX = 300;
+  const cardY = currentNodeY - 100;
+  const cardW = 680;
+  const cardH = 200;
+  const rgb = hexToRgb(step.color);
+
+  drawRoundedRect(ctx, cardX, cardY, cardW, cardH, 24, `rgba(${rgb.r},${rgb.g},${rgb.b},0.08)`, `rgba(${rgb.r},${rgb.g},${rgb.b},0.2)`);
+
+  // Connector line from node to card
+  ctx.strokeStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},0.3)`;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(lineX + 42, currentNodeY);
+  ctx.lineTo(cardX, currentNodeY);
+  ctx.stroke();
+
+  // Step title
+  drawCenteredText(ctx, step.title, cardX + cardW/2, cardY + 75, '800 60px Tajawal', C.white, true);
+  // Step stat
+  drawCenteredText(ctx, step.stat, cardX + cardW/2, cardY + 140, '700 42px Tajawal', step.color, true);
+
+  ctx.restore();
+
+  // Top progress indicator
+  const progFade = easeOut(t * 3);
+  ctx.save();
+  ctx.globalAlpha = progFade;
+  // Progress bar
+  const pbX = 140, pbY = 100, pbW = W - 280, pbH = 10;
+  drawRoundedRect(ctx, pbX, pbY, pbW, pbH, 5, 'rgba(67,97,238,0.15)', null);
+  const fillW = pbW * ((stepIdx + easeOut(Math.min(1, t*1.5))) / 5);
+  drawRoundedRect(ctx, pbX, pbY, fillW, pbH, 5, step.color, null);
+  // Step label
+  drawCenteredText(ctx, `خطوة ${step.num} من ٥`, W/2, 70, '700 36px Tajawal', C.pale, true);
+  ctx.restore();
+}
+
+
+// ============================================================
+// PLAYBACK ENGINE
+// ============================================================
+let playing1 = false, playing2 = false;
+let anim1 = null, anim2 = null;
+
+function playVideo1() {
+  if (playing1) return;
+  playing1 = true;
+  document.getElementById('preview1').disabled = true;
+  const canvas = document.getElementById('canvas1');
+  const ctx = canvas.getContext('2d');
+  let startTime = null;
+
+  function frame(ts) {
+    if (!startTime) startTime = ts;
+    const elapsed = (ts - startTime) / 1000;
+    if (elapsed >= V1_TOTAL) {
+      playing1 = false;
+      document.getElementById('preview1').disabled = false;
+      drawVideo1Frame(ctx, V1_TOTAL - 0.01);
+      return;
+    }
+    drawVideo1Frame(ctx, elapsed);
+    anim1 = requestAnimationFrame(frame);
+  }
+  anim1 = requestAnimationFrame(frame);
+}
+
+function playVideo2() {
+  if (playing2) return;
+  playing2 = true;
+  document.getElementById('preview2').disabled = true;
+  const canvas = document.getElementById('canvas2');
+  const ctx = canvas.getContext('2d');
+  let startTime = null;
+
+  function frame(ts) {
+    if (!startTime) startTime = ts;
+    const elapsed = (ts - startTime) / 1000;
+    if (elapsed >= V2_TOTAL) {
+      playing2 = false;
+      document.getElementById('preview2').disabled = false;
+      drawVideo2Frame(ctx, V2_TOTAL - 0.01);
+      return;
+    }
+    drawVideo2Frame(ctx, elapsed);
+    anim2 = requestAnimationFrame(frame);
+  }
+  anim2 = requestAnimationFrame(frame);
+}
+
+// ============================================================
+// EXPORT ENGINE (MediaRecorder)
+// ============================================================
+async function exportVideo(videoNum) {
+  const canvas = document.getElementById('canvas' + videoNum);
+  const ctx = canvas.getContext('2d');
+  const drawFn = videoNum === 1 ? drawVideo1Frame : drawVideo2Frame;
+  const totalTime = videoNum === 1 ? V1_TOTAL : V2_TOTAL;
+  const totalFrames = totalTime * FPS;
+
+  const btnPreview = document.getElementById('preview' + videoNum);
+  const btnExport = document.getElementById('export' + videoNum);
+  const progressBar = document.getElementById('progress' + videoNum);
+  const fill = document.getElementById('fill' + videoNum);
+  const statusText = document.getElementById('status' + videoNum);
+
+  btnPreview.disabled = true;
+  btnExport.disabled = true;
+  progressBar.style.display = 'block';
+  fill.style.width = '0%';
+  statusText.textContent = 'Preparing export...';
+
+  // Try to find a supported MIME type
+  let mimeType = '';
+  const candidates = [
+    'video/webm;codecs=vp9',
+    'video/webm;codecs=vp8',
+    'video/webm',
+  ];
+  for (const mt of candidates) {
+    if (MediaRecorder.isTypeSupported(mt)) { mimeType = mt; break; }
+  }
+  if (!mimeType) {
+    statusText.textContent = 'Error: No supported video MIME type found in this browser.';
+    btnPreview.disabled = false;
+    btnExport.disabled = false;
+    progressBar.style.display = 'none';
+    return;
+  }
+
+  statusText.textContent = `Encoding with ${mimeType}...`;
+
+  const stream = canvas.captureStream(0); // manual frame push
+  const recorder = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 8000000 });
+  const chunks = [];
+  recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
+
+  const exportDone = new Promise(resolve => {
+    recorder.onstop = () => resolve();
+  });
+
+  recorder.start();
+
+  // Render frame by frame
+  for (let f = 0; f < totalFrames; f++) {
+    const time = f / FPS;
+    drawFn(ctx, time);
+
+    // Request a frame from captureStream
+    if (stream.getVideoTracks()[0].requestFrame) {
+      stream.getVideoTracks()[0].requestFrame();
+    }
+
+    // Update progress
+    const pct = ((f + 1) / totalFrames * 100).toFixed(1);
+    fill.style.width = pct + '%';
+    statusText.textContent = `Rendering frame ${f + 1}/${totalFrames} (${pct}%)`;
+
+    // Yield to browser every frame for smooth progress
+    await new Promise(r => setTimeout(r, 1000 / FPS));
+  }
+
+  recorder.stop();
+  await exportDone;
+
+  // Create download
+  const blob = new Blob(chunks, { type: mimeType });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const name = videoNum === 1 ? 'oilexam_quiz_challenge.webm' : 'oilexam_success_roadmap.webm';
+  a.href = url;
+  a.download = name;
+  a.click();
+  URL.revokeObjectURL(url);
+
+  statusText.textContent = `Exported ${name} (${(blob.size / 1024 / 1024).toFixed(1)} MB) — convert to MP4 with ffmpeg`;
+  fill.style.width = '100%';
+  btnPreview.disabled = false;
+  btnExport.disabled = false;
+}
+
+// ============================================================
+// INIT
+// ============================================================
+window.addEventListener('DOMContentLoaded', () => {
+  loadFonts();
+});
+</script>
+</body>
+</html>
